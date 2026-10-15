@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>04 - Funciones Anónimas en JavaScript</title>
-  <style>
-    :root {
+  <style>:root {
       --primary: #0284c7;
       --primary-hover: #0369a1;
       --bg: #f8fafc;
@@ -198,11 +197,10 @@
       color: #ffffff;
       border-color: #0284c7;
     }
-  </style>
+</style>
 </head>
 <body>
 
-  <!-- Contenedor principal del ejercicio -->
   <main class="container">
     <header>
       <span class="badge">Módulo 6.2 · Funciones</span>
@@ -212,38 +210,34 @@
       </p>
     </header>
 
-    <!-- Explicación conceptual integrada -->
     <section class="theory-box">
       <strong>Concepto clave:</strong> Una función anónima no tiene nombre propio. Se almacena en una variable o se pasa como argumento (*callback*), tratando a las funciones como valores de primera clase.
     </section>
 
-    <!-- Calculadora interactiva individual -->
     <section class="calc-section">
       <input type="number" id="inputNumero" placeholder="Ingresa un número (ej: 7)" value="9" step="any" />
       <button id="btnCalcular" type="button">Calcular Cuadrado</button>
     </section>
 
-    <!-- Visualización del cálculo individual -->
     <section class="display-card" aria-live="polite">
       <div class="card-title">Resultado de elevarAlCuadrado()</div>
       <div class="card-number" id="resultadoCuadrado">81</div>
       <div class="card-detail" id="detalleOperacion">9² = 9 × 9 = 81</div>
     </section>
 
-    <!-- Demostración adicional de función anónima como Callback -->
     <section class="array-demo-card">
       <div class="array-title">Demostración: Función anónima como Callback en un Array</div>
       <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">
         Array original:
       </p>
       <div class="chips-container" id="contenedorOriginal">
-        <!-- Renderizado dinámico -->
+
       </div>
       <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">
         Array transformado con <code>.map(function(n) { return elevarAlCuadrado(n); })</code>:
       </p>
       <div class="chips-container" id="contenedorTransformado">
-        <!-- Renderizado dinámico -->
+
       </div>
     </section>
   </main>

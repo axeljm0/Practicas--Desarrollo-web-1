@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>08 - Constructores y el Operador 'new' en JavaScript</title>
-  <style>
-    :root {
+  <style>:root {
       --primary: #be185d;
       --primary-hover: #9d174d;
       --bg: #f8fafc;
@@ -204,11 +203,10 @@
       color: var(--text-muted);
       line-height: 1.5;
     }
-  </style>
+</style>
 </head>
 <body>
 
-  <!-- Contenedor principal -->
   <main class="container">
     <header>
       <span class="badge">Módulo 6.3 · Objetos</span>
@@ -218,7 +216,6 @@
       </p>
     </header>
 
-    <!-- Formulario para agregar nuevas instancias dinámicamente -->
     <section class="form-container">
       <div class="form-title">Crear Nueva Instancia con 'new Persona()'</div>
       <form id="formNuevaPersona" class="form-row">
@@ -238,17 +235,15 @@
       </form>
     </section>
 
-    <!-- Grid donde se listan las 3 instancias iniciales y las nuevas -->
     <section>
       <div style="font-size: 0.9rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem;">
         Instancias Activas en Memoria
       </div>
       <div id="contenedorInstancias" class="instances-grid">
-        <!-- Renderizado dinámico de tarjetas -->
+
       </div>
     </section>
 
-    <!-- Resumen pedagógico -->
     <footer class="theory-note">
       <strong>Mecánica del operador <code>new</code>:</strong> (1) Crea un objeto vacío en blanco <code>{}</code>; (2) Asigna su prototipo a <code>Persona.prototype</code>; (3) Enlaza <code>this</code> a dicho objeto; (4) Ejecuta el cuerpo del constructor y retorna el objeto creado.
     </footer>

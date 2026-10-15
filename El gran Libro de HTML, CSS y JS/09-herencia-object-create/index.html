@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>09 - Herencia Prototípica con Object.create() en JavaScript</title>
-  <style>
-    :root {
+  <style>:root {
       --primary: #0891b2;
       --primary-hover: #0e7490;
       --bg: #f8fafc;
@@ -178,11 +177,10 @@
       margin-bottom: 0.5rem;
       letter-spacing: 0.05em;
     }
-  </style>
+</style>
 </head>
 <body>
 
-  <!-- Contenedor principal -->
   <main class="container">
     <header>
       <span class="badge">Módulo 6.3 · Objetos</span>
@@ -192,9 +190,8 @@
       </p>
     </header>
 
-    <!-- Diagrama visual de la cadena prototípica -->
     <section class="chain-diagram">
-      <!-- Objeto Prototipo Base -->
+
       <div class="proto-box base">
         <span class="box-tag tag-base">Objeto Prototipo: animal</span>
         <div><strong>Métodos compartidos:</strong> <code>hacerSonido()</code>, <code>dormir()</code></div>
@@ -205,7 +202,6 @@
         ▲ hereda vía Object.create(animal)
       </div>
 
-      <!-- Objeto Derivado -->
       <div class="proto-box derived">
         <span class="box-tag tag-derived">Objeto Derivado: perro</span>
         <div><strong>Propiedades propias:</strong> <code>nombre = "Firulais"</code>, <code>raza = "Golden Retriever"</code></div>
@@ -213,7 +209,6 @@
       </div>
     </section>
 
-    <!-- Botones interactivos para probar la cadena prototípica -->
     <section class="button-grid">
       <button id="btnLadrar" type="button">
         1. Ejecutar perro.ladrar() (Método propio)
@@ -229,7 +224,6 @@
       </button>
     </section>
 
-    <!-- Terminal de resultados en pantalla -->
     <section class="output-panel">
       <div class="output-title">Salida de Ejecución y Diagnóstico de Prototipos</div>
       <div id="pantallaSalida">

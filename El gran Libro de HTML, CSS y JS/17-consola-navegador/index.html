@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>17 - Consola del Navegador y Errores de Programación</title>
+  <style>:root {
+      --primary: #dc2626;
+      --primary-hover: #b91c1c;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --badge-bg: #fee2e2;
+      --badge-text: #991b1b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      padding: 2rem 1rem;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 720px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border);
+      padding: 2rem;
+    }
+
+    header {
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1rem;
+    }
+
+    .badge {
+      display: inline-block;
+      background-color: var(--badge-bg);
+      color: var(--badge-text);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.25rem 0.6rem;
+      border-radius: 9999px;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    p.description {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .guide-box {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .guide-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #1e40af;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+
+    .shortcuts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 560px) {
+      .shortcuts-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .shortcut-item {
+      background: #ffffff;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      border: 1px solid #dbeafe;
+    }
+
+    kbd {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      padding: 0.15rem 0.4rem;
+      font-family: monospace;
+      font-size: 0.8rem;
+      box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    }
+
+    .buttons-section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.5rem;
+    }
+
+    @media (max-width: 600px) {
+      .btn-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    button {
+      background-color: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 0.75rem 0.85rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s;
+      text-align: center;
+    }
+
+    button:hover {
+      background-color: var(--primary-hover);
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .btn-clear {
+      background: #64748b;
+    }
+
+    .btn-clear:hover {
+      background: #475569;
+    }
+
+    .console-panel {
+      background: #0f172a;
+      border-radius: 8px;
+      padding: 1.25rem;
+      color: #f8fafc;
+      font-family: monospace;
+      font-size: 0.85rem;
+      min-height: 140px;
+      max-height: 260px;
+      overflow-y: auto;
+      margin-bottom: 1.5rem;
+      border: 1px solid #334155;
+    }
+
+    .console-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #334155;
+    }
+
+    .console-title {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .log-item {
+      padding: 0.5rem 0.75rem;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+      border-left: 4px solid #ef4444;
+      background: rgba(239, 68, 68, 0.1);
+      color: #fca5a5;
+    }
+
+    .log-item.info {
+      border-left-color: #38bdf8;
+      background: rgba(56, 189, 248, 0.1);
+      color: #7dd3fc;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 0.65rem 0.75rem;
+      text-align: left;
+    }
+
+    th {
+      background: #f1f5f9;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    tr:nth-child(even) {
+      background: #f8fafc;
+    }
+</style>
+</head>
+<body>
+
+  <main class="container">
+
+    <header>
+      <span class="badge">Módulo 6.6 · Depuración</span>
+      <h1>Ejercicio 17: La Consola del Navegador</h1>
+      <p class="description">
+        Identificación y diagnóstico de los 3 errores más frecuentes de programación en JavaScript: función inexistente, acceso a objeto nulo y uso de variable no declarada.
+      </p>
+    </header>
+
+    <section class="guide-box">
+      <div class="guide-title">¿Cómo abrir la Consola en tu navegador?</div>
+      <div class="shortcuts-grid">
+        <div class="shortcut-item">
+          <strong>Chrome / Edge:</strong> Presiona <kbd>F12</kbd> o <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>J</kbd> (Mac: <kbd>Cmd</kbd> + <kbd>Opt</kbd> + <kbd>J</kbd>)
+        </div>
+        <div class="shortcut-item">
+          <strong>Firefox:</strong> Presiona <kbd>F12</kbd> o <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>K</kbd> (Mac: <kbd>Cmd</kbd> + <kbd>Opt</kbd> + <kbd>K</kbd>)
+        </div>
+        <div class="shortcut-item">
+          <strong>Safari:</strong> Activa el menú Desarrollo y presiona <kbd>Cmd</kbd> + <kbd>Opt</kbd> + <kbd>C</kbd>
+        </div>
+        <div class="shortcut-item">
+          <strong>Atajo Universal:</strong> Clic derecho en cualquier lugar de la página y elegir <em>"Inspeccionar"</em>.
+        </div>
+      </div>
+    </section>
+
+    <section class="buttons-section">
+      <div class="btn-row">
+        <button id="btnErrorFuncion" type="button">
+          1. Función Inexistente
+        </button>
+        <button id="btnErrorObjeto" type="button">
+          2. Propiedad de Nulo
+        </button>
+        <button id="btnErrorVariable" type="button">
+          3. Variable no Declarada
+        </button>
+      </div>
+      <button id="btnLimpiarConsola" type="button" class="btn-clear">
+        Limpiar Pantalla
+      </button>
+    </section>
+
+    <section class="console-panel" aria-live="polite">
+      <div class="console-header">
+        <span class="console-title">Consola Visual en Pantalla</span>
+        <span style="color: #64748b; font-size: 0.75rem;">Abre también la consola nativa (F12)</span>
+      </div>
+      <div id="pantallaConsola">
+        <div class="log-item info">Haz clic en los botones superiores para generar y diagnosticar errores.</div>
+      </div>
+    </section>
+
+    <section>
+      <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 0.5rem;">
+        Tabla Comparativa: Errores, Causas Comunes y Diagnóstico
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo de Error</th>
+            <th>Causa Frecuente</th>
+            <th>Comportamiento en Consola</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>ReferenceError</code></td>
+            <td>Se intenta llamar a una función o leer una variable que no ha sido definida en ningún ámbito.</td>
+            <td>Muestra el nombre del identificador faltante y el archivo/línea exacto de la llamada.</td>
+          </tr>
+          <tr>
+            <td><code>TypeError</code></td>
+            <td>Se intenta acceder a una propiedad o método sobre un valor que es <code>null</code> o <code>undefined</code>.</td>
+            <td>Indica <em>"Cannot read property 'x' of undefined / null"</em> señalando la línea del acceso.</td>
+          </tr>
+          <tr>
+            <td><code>ReferenceError</code> (Modo Estricto)</td>
+            <td>Se asigna o lee una variable sin haberla declarado previamente con <code>var</code>.</td>
+            <td>En modo estricto ("use strict") impide crear variables globales accidentales y arroja error.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

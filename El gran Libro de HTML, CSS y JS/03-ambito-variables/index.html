@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>03 - Ámbito de Variables en JavaScript</title>
-  <style>
-    :root {
+  <style>:root {
       --primary: #7c3aed;
       --primary-hover: #6d28d9;
       --bg: #f8fafc;
@@ -230,11 +229,10 @@
       border-left-color: #f59e0b;
       color: #fde68a;
     }
-  </style>
+</style>
 </head>
 <body>
 
-  <!-- Contenedor principal -->
   <main class="container">
     <header>
       <span class="badge">Módulo 6.2 · Funciones</span>
@@ -244,7 +242,6 @@
       </p>
     </header>
 
-    <!-- Representación visual del anidamiento de ámbitos -->
     <section class="scope-diagram">
       <p>Variable en Ámbito Global:</p>
       <span class="code-pill">let mensajeGlobal = "Soy visible en todo el script";</span>
@@ -255,7 +252,6 @@
       </div>
     </section>
 
-    <!-- Botones de pruebas pedagógicas -->
     <section class="button-grid">
       <button id="btnProbarGlobal" type="button">
         1. Acceder a variable global
@@ -271,14 +267,13 @@
       </button>
     </section>
 
-    <!-- Consola interactiva en pantalla -->
     <section class="log-container">
       <div class="log-header">
         <span class="log-title">Consola de Resultados en Pantalla</span>
         <button id="btnLimpiarLogs" class="btn-clear" type="button">Limpiar</button>
       </div>
       <div id="pantallaConsola">
-        <!-- Salidas generadas dinámicamente -->
+
       </div>
     </section>
   </main>

@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>12 - Objeto Estándar Date en JavaScript</title>
-  <style>
-    :root {
+  <style>:root {
       --primary: #9333ea;
       --primary-hover: #7e22ce;
       --bg: #f8fafc;
@@ -199,11 +198,10 @@
       color: #78350f;
       line-height: 1.5;
     }
-  </style>
+</style>
 </head>
 <body>
 
-  <!-- Contenedor principal -->
   <main class="container">
     <header>
       <span class="badge">Módulo 6.4 · Objetos Estándar</span>
@@ -213,14 +211,12 @@
       </p>
     </header>
 
-    <!-- Selector de fecha de cumpleaños -->
     <section class="date-input-section">
       <label for="inputCumple">Selecciona fecha de nacimiento:</label>
       <input type="date" id="inputCumple" value="1995-05-15" />
       <button id="btnCalcularFecha" type="button">Procesar Fecha</button>
     </section>
 
-    <!-- Tarjetas de métricas calculadas -->
     <section class="summary-cards">
       <div class="stat-card">
         <div class="stat-label">Edad Actual Calculada</div>
@@ -232,7 +228,6 @@
       </div>
     </section>
 
-    <!-- Desglose de los métodos Getters del objeto Date -->
     <section>
       <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">
         Desglose de Getters de Date
@@ -257,7 +252,6 @@
       </div>
     </section>
 
-    <!-- Nota didáctica sobre el desfase de meses -->
     <footer class="tip-box">
       <strong>¡Ojo con getMonth() en JavaScript!:</strong> Los meses en el objeto Date tienen índice base cero (0 = Enero, 1 = Febrero ... 11 = Diciembre). Por ello, para mostrar el mes a un usuario humano siempre se debe sumar <code>+ 1</code>.
     </footer>

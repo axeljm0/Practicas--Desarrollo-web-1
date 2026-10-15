@@ -1,8 +1,8 @@
-# Colección Didáctica de JavaScript: 16 Proyectos Educativos
+# Colección Didáctica de JavaScript: 21 Proyectos Educativos
 
-Bienvenido a la colección oficial de **16 proyectos educativos de JavaScript puro (Vanilla JS)**, diseñada con un enfoque pedagógico riguroso y progresivo, basado en el temario del manual *"El gran libro de HTML, CSS y JavaScript"*.
+Bienvenido a la colección oficial de **21 proyectos educativos de JavaScript puro (Vanilla JS)**, diseñada con un enfoque pedagógico riguroso y progresivo, basado en el temario del manual *"El gran libro de HTML, CSS y JavaScript"*.
 
-Esta serie de ejercicios está construida para llevar a los estudiantes desde los fundamentos sintácticos de las funciones hasta la manipulación dinámica del DOM, objetos estándar, asincronía y el desarrollo de una aplicación web completa con persistencia en LocalStorage.
+Esta serie de ejercicios está construida para llevar a los estudiantes desde los fundamentos sintácticos de las funciones hasta la manipulación dinámica del DOM, objetos estándar, asincronía, técnicas profesionales de **depuración (debugging)** y el desarrollo de proyectos integradores con persistencia en LocalStorage y manejo robusto de excepciones.
 
 ---
 
@@ -26,6 +26,11 @@ Esta serie de ejercicios está construida para llevar a los estudiantes desde lo
 | 14 | **Manipulación del DOM** | 6.5 DOM y Eventos | Intermedio | `getElementById`, `textContent`, `style`, `classList`, eventos | [Ver Proyecto](./14-manipulacion-dom/) |
 | 15 | **Temporizadores** | 6.5 DOM y Asincronía | Intermedio | `setInterval`, `clearInterval`, `setTimeout`, Web APIs, Event Loop | [Ver Proyecto](./15-temporizadores/) |
 | 16 | **Proyecto Integrador (To-Do List)** | 6 Integración Final | Avanzado | CRUD completo, objetos, arrays, DOM, `localStorage`, filtros | [Ver Proyecto](./16-proyecto-integrador-lista-tareas/) |
+| 17 | **Consola del Navegador** | 6.6 Depuración | Principiante | DevTools, atajos de consola, `ReferenceError`, `TypeError`, tabla diagnóstica | [Ver Proyecto](./17-consola-navegador/) |
+| 18 | **Objeto Console** | 6.6 Depuración | Intermedio | `console.log`, bucles `for`, `assert`, `clear`, inspección de objetos vs `alert` | [Ver Proyecto](./18-objeto-console/) |
+| 19 | **Evento Error** | 6.6 Depuración | Intermedio | `window.addEventListener("error")`, `ErrorEvent`, lineno, colno, telemetría | [Ver Proyecto](./19-evento-error/) |
+| 20 | **Excepciones (try / catch / throw)** | 6.6 Depuración | Intermedio | Validaciones defensivas, `throw new Error`, regex, control de formularios | [Ver Proyecto](./20-excepciones-try-catch/) |
+| 21 | **Proyecto Integrador (Inventario)** | 6.6 Depuración Final | Avanzado | Errores personalizados (`ErrorProducto`, `ErrorExistencia`), log cromático | [Ver Proyecto](./21-proyecto-integrador-depuracion/) |
 
 ---
 
@@ -113,12 +118,49 @@ Esta serie de ejercicios está construida para llevar a los estudiantes desde lo
 │   ├── styles.css
 │   └── README.md
 │
-└── 16-proyecto-integrador-lista-tareas/       # Proyecto Integrador
+├── 16-proyecto-integrador-lista-tareas/       # Proyecto Integrador Web
+│   ├── index.html
+│   ├── script.js
+│   ├── styles.css
+│   └── README.md
+│
+├── 17-consola-navegador/                      # 6.6 Depuración
+│   ├── index.html
+│   ├── script.js
+│   └── README.md
+│
+├── 18-objeto-console/                         # 6.6 Depuración
+│   ├── index.html
+│   ├── script.js
+│   └── README.md
+│
+├── 19-evento-error/                           # 6.6 Depuración
+│   ├── index.html
+│   ├── script.js
+│   └── README.md
+│
+├── 20-excepciones-try-catch/                  # 6.6 Depuración
+│   ├── index.html
+│   ├── script.js
+│   └── README.md
+│
+└── 21-proyecto-integrador-depuracion/         # 6.6 Depuración (Proyecto Integrador)
     ├── index.html
     ├── script.js
     ├── styles.css
     └── README.md
 ```
+
+---
+
+## 🔍 Sección 6.6: Depuración (Debugging)
+
+La sección 6.6 dota a los estudiantes de herramientas críticas para la resolución de errores en desarrollo profesional:
+- **17 · Consola del Navegador:** Comprensión de herramientas de desarrollo (DevTools), atajos de teclado para Chrome, Firefox, Edge y Safari, y diagnóstico de `ReferenceError` y `TypeError`.
+- **18 · Objeto Console:** Dominio de `console.log()` en bucles `for`, aserciones con `console.assert()`, limpieza con `console.clear()` y visualización no bloqueante frente a `alert()`.
+- **19 · Evento Global Error:** Monitoreo y telemetría de fallos en tiempo de ejecución interceptados en `window` con `ErrorEvent` (`message`, `lineno`, `colno`, `filename`).
+- **20 · Excepciones (try / catch / throw):** Validaciones defensivas emitiendo instancias de `Error` y captura con retroalimentación visual en tiempo real.
+- **21 · Proyecto Integrador - Sistema de Inventario:** Arquitectura comercial con catálogo en memoria, excepciones personalizadas (`ErrorProducto`, `ErrorExistencia`, `ErrorCantidad`) mediante herencia prototípica en ES5 y panel de diagnóstico cromático (`.log-info`, `.log-warning`, `.log-error`, `.log-success`).
 
 ---
 
@@ -129,9 +171,9 @@ Esta serie de ejercicios está construida para llevar a los estudiantes desde lo
 - Solo necesitas un **navegador web moderno** (Google Chrome, Mozilla Firefox, Microsoft Edge, Safari u Opera).
 
 ### ¿Cómo probar cualquiera de los proyectos?
-1. Navega a la carpeta del ejercicio deseado (por ejemplo `01-funciones-basicas/` o `16-proyecto-integrador-lista-tareas/`).
+1. Navega a la carpeta del ejercicio deseado (por ejemplo `17-consola-navegador/` o `21-proyecto-integrador-depuracion/`).
 2. Abre el archivo `index.html` con un doble clic en tu explorador de archivos, o haz clic derecho y selecciona **Abrir con... > Tu navegador**.
-3. También puedes utilizar extensiones de desarrollo como **Live Server** en VS Code o abrir la consola de desarrollador del navegador (`F12` o `Ctrl + Shift + I`) para observar los registros estructurados en vivo.
+3. Abre la consola de desarrollo del navegador (<kbd>F12</kbd> o <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd>) para observar las salidas, advertencias y trazas de error estructuradas en paralelo al DOM.
 
 ---
 
@@ -141,7 +183,7 @@ Todos los archivos han sido construidos respetando los estándares de la industr
 - **Modo Estricto (`"use strict";`):** Previene errores silenciosos, asignaciones accidentales a variables globales no declaradas y optimizaciones del motor JS.
 - **Salida Gráfica en el DOM:** Se evita el abuso de `alert()` o simples `console.log()` en favor de componentes visuales (tarjetas, medidores, formularios e insignias) para una experiencia inmersiva.
 - **Gestión Moderna de Eventos:** Uso de `addEventListener` desacoplando la estructura HTML del comportamiento JavaScript.
-- **Nomenclatura Limpia:** Funciones y variables en `camelCase` autoexplicativo, modularidad y separación estricta entre capa de datos, lógica y presentación.
+- **Cumplimiento de Especificaciones:** Los ejercicios 17 al 21 emplean sintaxis canónica **ES5** (`var`, `function`, concatenación con `+`), facilitando la comprensión profunda de los mecanismos nativos del lenguaje.
 - **Documentación Exhaustiva:** Cada carpeta contiene su propio `README.md` con objetivos formativos, código clave comentado y retos adicionales para incentivar la práctica independiente.
 
 ---

@@ -4,12 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>15 - Temporizadores en JavaScript</title>
-  <!-- Enlace a la hoja de estilos externa requerida -->
+
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- Contenedor principal de la aplicación -->
   <main class="container">
     <header>
       <span class="badge">Módulo 6.5 · Asincronía y Temporizadores</span>
@@ -19,20 +18,17 @@
       </p>
     </header>
 
-    <!-- Pantalla digital del cronómetro -->
     <section class="timer-display-box" aria-live="polite">
       <div id="indicadorEstado" class="status-indicator">DETENIDO</div>
       <div id="displayTiempo" class="timer-digits">00:00:00</div>
     </section>
 
-    <!-- Botonera de control del cronómetro -->
     <section class="controls-row">
       <button id="btnIniciar" type="button" class="btn-start">▶ Iniciar</button>
       <button id="btnPausar" type="button" class="btn-pause">⏸ Pausar</button>
       <button id="btnReiniciar" type="button" class="btn-reset">⏹ Reiniciar</button>
     </section>
 
-    <!-- Sección de temporizador diferido con setTimeout -->
     <section class="timeout-card">
       <div class="timeout-title">Programar Alerta Diferida con setTimeout</div>
       <div class="timeout-form">
@@ -41,18 +37,15 @@
       </div>
     </section>
 
-    <!-- Alerta visual desplegada por setTimeout -->
     <div id="alertaToast" class="toast-alert" role="status">
       🔔 ¡Tiempo cumplido! Esta notificación fue disparada de forma asíncrona por <code>setTimeout</code>.
     </div>
 
-    <!-- Nota didáctica sobre el Event Loop -->
     <footer class="loop-theory" style="margin-top: 1.5rem;">
       <strong>¿Cómo funciona internamente?:</strong> Los temporizadores de JavaScript no bloquean el hilo principal. Son delegados a las <em>Web APIs</em> del navegador, las cuales colocan el callback en la cola de tareas (*Task Queue*) para que el *Event Loop* lo ejecute cuando el tiempo se cumpla.
     </footer>
   </main>
 
-  <!-- Enlace al archivo de script externo -->
   <script src="script.js"></script>
 </body>
 </html>

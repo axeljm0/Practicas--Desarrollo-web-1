@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>11 - Objeto Estándar Array en JavaScript</title>
-  <style>
-    :root {
+  <style>:root {
       --primary: #059669;
       --primary-hover: #047857;
       --bg: #f8fafc;
@@ -201,11 +200,10 @@
     button.secondary:hover {
       background-color: #475569;
     }
-  </style>
+</style>
 </head>
 <body>
 
-  <!-- Contenedor principal -->
   <main class="container">
     <header>
       <span class="badge">Módulo 6.4 · Objetos Estándar</span>
@@ -215,24 +213,21 @@
       </p>
     </header>
 
-    <!-- Visualización gráfica del arreglo base -->
     <section class="array-board">
       <div class="board-title">Arreglo Base en Memoria</div>
       <div class="tiles-container" id="contenedorTiles">
-        <!-- Generado dinámicamente -->
+
       </div>
     </section>
 
-    <!-- Botones interactivos de mutación del arreglo -->
     <section class="control-buttons" style="margin-bottom: 1.5rem;">
       <button id="btnPush" type="button">+ push(99) al final</button>
       <button id="btnPop" type="button" class="secondary">- pop() último</button>
       <button id="btnReset" type="button" class="secondary">Restablecer Original</button>
     </section>
 
-    <!-- Lista de las 6 operaciones con Array -->
     <section class="operations-grid">
-      <!-- 1. Mutación push / pop -->
+
       <article class="op-row">
         <div class="op-header">
           <div class="op-title">1. Agregar y Eliminar</div>
@@ -241,7 +236,6 @@
         <div class="op-display" id="resPushPop">...</div>
       </article>
 
-      <!-- 2. Ordenamiento -->
       <article class="op-row">
         <div class="op-header">
           <div class="op-title">2. Orden Ascendente</div>
@@ -250,7 +244,6 @@
         <div class="op-display" id="resSort">...</div>
       </article>
 
-      <!-- 3. Filtrado -->
       <article class="op-row">
         <div class="op-header">
           <div class="op-title">3. Filtrar Mayores a 15</div>
@@ -259,7 +252,6 @@
         <div class="op-display" id="resFilter">...</div>
       </article>
 
-      <!-- 4. Mapeo / Transformación -->
       <article class="op-row">
         <div class="op-header">
           <div class="op-title">4. Multiplicar por 2 (Doble)</div>
@@ -268,7 +260,6 @@
         <div class="op-display" id="resMap">...</div>
       </article>
 
-      <!-- 5. Reducción / Acumulador -->
       <article class="op-row">
         <div class="op-header">
           <div class="op-title">5. Suma Total Acumulada</div>
@@ -277,7 +268,6 @@
         <div class="op-display" id="resReduce">...</div>
       </article>
 
-      <!-- 6. Búsqueda -->
       <article class="op-row">
         <div class="op-header">
           <div class="op-title">6. Búsqueda e Índices</div>

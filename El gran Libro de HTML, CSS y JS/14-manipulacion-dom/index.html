@@ -4,14 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>14 - Manipulación del DOM en JavaScript</title>
-  <!-- Enlace a la hoja de estilos externa requerida -->
+
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- Contenedor principal de la aplicación -->
   <main class="container">
-    <!-- Encabezado con información del módulo -->
+
     <header>
       <span class="badge">Módulo 6.5 · Manipulación del DOM</span>
       <h1>Ejercicio 14: Manipulación del DOM</h1>
@@ -20,16 +19,14 @@
       </p>
     </header>
 
-    <!-- Escenario donde se encuentra el párrafo objetivo a transformar -->
     <section class="target-stage" id="escenarioObjetivo">
       <p id="parrafoObjetivo" class="target-paragraph">
         Texto original inicial: Este párrafo es un nodo del DOM a la espera de ser manipulado mediante JavaScript.
       </p>
     </section>
 
-    <!-- Panel de controles interactivos organizado por categorías -->
     <section class="controls-grid">
-      <!-- Grupo 1: Contenido de Texto -->
+
       <div class="control-group">
         <div class="control-title">Modificar Texto</div>
         <div class="button-row">
@@ -38,7 +35,6 @@
         </div>
       </div>
 
-      <!-- Grupo 2: Color del Texto -->
       <div class="control-group">
         <div class="control-title">Paleta de Colores (.style.color)</div>
         <div class="button-row">
@@ -49,7 +45,6 @@
         </div>
       </div>
 
-      <!-- Grupo 3: Clases CSS (classList) -->
       <div class="control-group">
         <div class="control-title">Alternar Clases (.classList)</div>
         <div class="button-row">
@@ -58,7 +53,6 @@
         </div>
       </div>
 
-      <!-- Grupo 4: Tamaño de Fuente -->
       <div class="control-group">
         <div class="control-title">Tamaño de Fuente</div>
         <div class="button-row">
@@ -68,14 +62,12 @@
       </div>
     </section>
 
-    <!-- Monitor de llamadas a la API del DOM -->
     <section class="log-box">
       <div class="log-box-title">Última instrucción DOM ejecutada:</div>
       <div id="registroDom">> Esperando interacción del usuario...</div>
     </section>
   </main>
 
-  <!-- Enlace al archivo JavaScript externo requerido -->
   <script src="script.js"></script>
 </body>
 </html>

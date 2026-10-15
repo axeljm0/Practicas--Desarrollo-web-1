@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>20 - Excepciones con try, catch y throw en JavaScript</title>
+  <style>:root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --badge-bg: #dbeafe;
+      --badge-text: #1e40af;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      padding: 2rem 1rem;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 680px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border);
+      padding: 2rem;
+    }
+
+    header {
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1rem;
+    }
+
+    .badge {
+      display: inline-block;
+      background-color: var(--badge-bg);
+      color: var(--badge-text);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.25rem 0.6rem;
+      border-radius: 9999px;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    p.description {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .form-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .hint {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    input {
+      padding: 0.65rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus {
+      border-color: var(--primary);
+    }
+
+    .btn-submit {
+      width: 100%;
+      background-color: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 0.75rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+
+    .btn-submit:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-submit:active {
+      transform: scale(0.99);
+    }
+
+    .results-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .status-card {
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid transparent;
+    }
+
+    .status-card.error {
+      background-color: #fef2f2;
+      border-color: #fecaca;
+      color: #b91c1c;
+    }
+
+    .status-card.success {
+      background-color: #f0fdf4;
+      border-color: #bbf7d0;
+      color: #15803d;
+    }
+
+    .status-card.info {
+      background-color: #f8fafc;
+      border-color: var(--border);
+      color: var(--text-muted);
+    }
+
+    .quick-tests {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .btn-quick {
+      background: #e2e8f0;
+      color: var(--text);
+      border: none;
+      padding: 0.4rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .btn-quick:hover {
+      background: #cbd5e1;
+    }
+</style>
+</head>
+<body>
+
+  <main class="container">
+    <header>
+      <span class="badge">Módulo 6.6 · Depuración</span>
+      <h1>Ejercicio 20: Excepciones con try, catch y throw</h1>
+      <p class="description">
+        Diseño de validaciones defensivas mediante la emisión intencional de excepciones con <code>throw new Error()</code> y su captura controlada con bloques <code>try / catch / finally</code>.
+      </p>
+    </header>
+
+    <section class="form-card">
+      <form id="formularioValidacion">
+
+        <div class="form-group">
+          <label for="inputEdad">Edad del usuario (años)</label>
+          <input type="number" id="inputEdad" placeholder="Ej: 25" value="25" />
+          <span class="hint">Debe ser un número entero mayor o igual a 18 y menor o igual a 120.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="inputEmail">Correo electrónico</label>
+          <input type="text" id="inputEmail" placeholder="usuario@dominio.com" value="usuario@ejemplo.com" />
+          <span class="hint">Validado mediante expresión regular estándar (debe contener usuario, '@' y dominio con extensión).</span>
+        </div>
+
+        <div class="form-group">
+          <label for="inputPassword">Contraseña de acceso</label>
+          <input type="password" id="inputPassword" placeholder="Ej: Clave1234" value="Secreta123" />
+          <span class="hint">Mínimo 8 caracteres, al menos un número y al menos una letra mayúscula.</span>
+        </div>
+
+        <button type="submit" class="btn-submit">
+          Validar Datos con try / catch
+        </button>
+      </form>
+
+      <div class="quick-tests">
+        <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); align-self: center;">Pruebas rápidas:</span>
+        <button type="button" id="btnTestValido" class="btn-quick">✔ Caso Válido</button>
+        <button type="button" id="btnTestMenorEdad" class="btn-quick">✖ Menor de Edad (15)</button>
+        <button type="button" id="btnTestEmailInvalido" class="btn-quick">✖ Email sin '@'</button>
+        <button type="button" id="btnTestPasswordCorta" class="btn-quick">✖ Clave corta (123)</button>
+      </div>
+    </section>
+
+    <section>
+      <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 0.5rem;">
+        Diagnóstico de Validación (Captura try / catch)
+      </div>
+      <div id="contenedorResultados" class="results-container" aria-live="polite">
+        <div class="status-card info">
+          Completa el formulario y pulsa "Validar Datos" para iniciar las comprobaciones.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

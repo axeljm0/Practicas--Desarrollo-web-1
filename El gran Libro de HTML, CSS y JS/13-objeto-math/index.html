@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>13 - Objeto Estándar Math en JavaScript</title>
-  <style>
-    :root {
+  <style>:root {
       --primary: #ea580c;
       --primary-hover: #c2410c;
       --bg: #f8fafc;
@@ -194,11 +193,10 @@
     .rounding-row:last-child {
       border-bottom: none;
     }
-  </style>
+</style>
 </head>
 <body>
 
-  <!-- Contenedor principal -->
   <main class="container">
     <header>
       <span class="badge">Módulo 6.4 · Objetos Estándar</span>
@@ -208,7 +206,6 @@
       </p>
     </header>
 
-    <!-- Generador aleatorio central -->
     <section class="hero-random">
       <div class="random-label">Número Aleatorio Generado (1 - 100)</div>
       <div class="random-number" id="numAleatorio">42</div>
@@ -216,30 +213,26 @@
       <button id="btnGenerarRandom" type="button">🎲 Generar Nuevo Número</button>
     </section>
 
-    <!-- Cuadrícula con operaciones sobre el número generado -->
     <section class="math-grid">
-      <!-- Raíz cuadrada -->
+
       <article class="math-card">
         <div class="math-header">Raíz Cuadrada</div>
         <div class="math-code">Math.sqrt(N)</div>
         <div class="math-result" id="resSqrt">--</div>
       </article>
 
-      <!-- Potencia cuadrada -->
       <article class="math-card">
         <div class="math-header">Potencia al Cuadrado</div>
         <div class="math-code">Math.pow(N, 2)</div>
         <div class="math-result" id="resPow">--</div>
       </article>
 
-      <!-- Potencia al cubo -->
       <article class="math-card">
         <div class="math-header">Potencia al Cubo</div>
         <div class="math-code">Math.pow(N, 3)</div>
         <div class="math-result" id="resPow3">--</div>
       </article>
 
-      <!-- Constante PI multiplicada -->
       <article class="math-card">
         <div class="math-header">Circunferencia con Math.PI</div>
         <div class="math-code">Math.PI * N</div>
@@ -247,7 +240,6 @@
       </article>
     </section>
 
-    <!-- Comparativa didáctica de métodos de redondeo -->
     <section class="rounding-comparison">
       <div class="rounding-title">Comparativa Didáctica de Redondeos sobre (N / 3): <span id="numDividido" style="color: var(--primary);">14.00</span></div>
       <div class="rounding-row">
