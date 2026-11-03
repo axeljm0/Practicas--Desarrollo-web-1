@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Proyecto interactivo educativo sobre el capítulo 6.6: Depuración en JavaScript. Domina la consola, excepciones, evento error y buenas prácticas de debugging.">
+  <title>Depuración en JavaScript | Capítulo 6.6</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ======================================================================
+       BARRA DE NAVEGACIÓN FIJA
+       ====================================================================== -->
+  <header class="navbar" role="banner">
+    <a href="#" class="brand" aria-label="Inicio proyecto depuración">
+      <div class="brand-icon" aria-hidden="true">🐞</div>
+      <span>JS Debugging 6.6</span>
+    </a>
+
+    <nav class="nav-tabs" role="tablist" aria-label="Secciones del curso">
+      <button class="nav-tab active" role="tab" aria-selected="true" data-tab="tab-intro" id="btn-tab-intro">
+        1. Introducción
+      </button>
+      <button class="nav-tab" role="tab" aria-selected="false" data-tab="tab-browser-console" id="btn-tab-browser-console">
+        2. Consola del Navegador
+      </button>
+      <button class="nav-tab" role="tab" aria-selected="false" data-tab="tab-console-object" id="btn-tab-console-object">
+        3. Objeto Console
+      </button>
+      <button class="nav-tab" role="tab" aria-selected="false" data-tab="tab-error-event" id="btn-tab-error-event">
+        4. Evento Error
+      </button>
+      <button class="nav-tab" role="tab" aria-selected="false" data-tab="tab-exceptions" id="btn-tab-exceptions">
+        5. Excepciones (try/catch)
+      </button>
+      <button class="nav-tab" role="tab" aria-selected="false" data-tab="tab-exercises" id="btn-tab-exercises">
+        6. Ejercicios Prácticos
+      </button>
+    </nav>
+  </header>
+
+  <!-- ======================================================================
+       CONTENIDO PRINCIPAL
+       ====================================================================== -->
+  <main class="main-wrapper" id="main-content">
+
+    <!-- ====================================================================
+         SECCIÓN 1: INTRODUCCIÓN A LA DEPURACIÓN
+         ==================================================================== -->
+    <section id="tab-intro" class="section-content active" role="tabpanel" aria-labelledby="btn-tab-intro">
+      <div class="section-header">
+        <span class="badge">Tema 6.6.1</span>
+        <h1 class="section-title">Introducción a la Depuración</h1>
+        <p class="section-subtitle">
+          Comprender qué es un error, por qué ocurre y cómo abordarlo metódicamente es la habilidad fundamental de todo desarrollador web.
+        </p>
+      </div>
+
+      <div class="card-grid">
+        <article class="card">
+          <h3>🔍 ¿Qué es la Depuración (Debugging)?</h3>
+          <p>
+            La depuración es el proceso metódico de identificar, analizar y eliminar fallos (<em>bugs</em>) en el código. No se trata de adivinar, sino de formular hipótesis, inspeccionar variables y verificar el flujo de ejecución paso a paso.
+          </p>
+          <p>
+            En JavaScript, un entorno interpretado y dinámico, un error no detectado puede detener por completo la ejecución de un script o generar comportamientos inesperados en la interfaz de usuario.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>🧠 La Paciencia como Virtud Técnica</h3>
+          <p>
+            Depurar requiere calma y rigor deductivo. Cuando un script falla, el intérprete de JavaScript suele darnos pistas exactas: el tipo de error, el archivo y la línea exacta donde la ejecución no pudo continuar.
+          </p>
+          <p>
+            Aprender a leer estas pistas con serenidad ahorra horas de frustración y convierte el error en una oportunidad didáctica.
+          </p>
+        </article>
+      </div>
+
+      <h2 style="margin-bottom: 1rem; color: #ffffff; font-size: 1.3rem;">Clasificación de Errores en JavaScript</h2>
+
+      <div class="card-grid">
+        <article class="card" style="border-top: 3px solid var(--danger);">
+          <h3 style="color: #f87171;">1. Errores de Programación</h3>
+          <p>
+            Ocurren por infringir las reglas sintácticas del lenguaje o invocar identificadores inexistentes.
+          </p>
+          <ul style="margin-left: 1.2rem; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">
+            <li><strong>SyntaxError:</strong> Paréntesis sin cerrar, palabras reservadas mal escritas.</li>
+            <li><strong>ReferenceError:</strong> Usar una variable o función no declarada.</li>
+            <li><strong>TypeError:</strong> Llamar a algo que no es función o acceder a propiedades de <code>null</code>/<code>undefined</code>.</li>
+          </ul>
+        </article>
+
+        <article class="card" style="border-top: 3px solid var(--warning);">
+          <h3 style="color: #fbbf24;">2. Errores Lógicos</h3>
+          <p>
+            El código es sintácticamente impecable y el navegador lo ejecuta sin arrojar alertas rojas, pero el resultado del cálculo o del flujo es incorrecto.
+          </p>
+          <ul style="margin-left: 1.2rem; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">
+            <li>Bucles infinitos o condiciones fuera por uno (<em>off-by-one</em>).</li>
+            <li>Inversión de condiciones booleanas (<code>&gt;</code> en lugar de <code>&lt;</code>).</li>
+            <li>Operaciones matemáticas con tipos mixtos (ej. <code>"5" + 2 = "52"</code>).</li>
+          </ul>
+        </article>
+
+        <article class="card" style="border-top: 3px solid var(--info);">
+          <h3 style="color: #38bdf8;">3. Errores Personalizados</h3>
+          <p>
+            Generados voluntariamente por el programador mediante la instrucción <code>throw</code> cuando se violan reglas de negocio o precondiciones esenciales.
+          </p>
+          <ul style="margin-left: 1.2rem; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">
+            <li>Intentar transferir más saldo del disponible.</li>
+            <li>Formularios con campos que no cumplen formatos válidos.</li>
+            <li>Objetos de error derivados de <code>Error</code> con nombres y mensajes específicos.</li>
+          </ul>
+        </article>
+      </div>
+
+      <!-- Simulador interactivo Sección 1 -->
+      <div class="interactive-panel">
+        <div class="panel-title">
+          <span>⚡ Demostración Interactiva: Generar Error de Programación</span>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
+          Haz clic en el siguiente botón para ejecutar un código controlado que intenta invocar una variable numérica como si fuese una función (<code>TypeError</code>). Observa cómo se refleja en la consola virtual y abre tus DevTools (<code>F12</code>) para comprobarlo.
+        </p>
+        <div class="btn-group">
+          <button id="btn-demo-intro-error" class="btn btn-danger">
+            ⚠️ Provocar TypeError Controlado
+          </button>
+          <button id="btn-clear-intro-console" class="btn btn-secondary">
+            🧹 Limpiar Salida
+          </button>
+        </div>
+
+        <div class="console-box" aria-live="polite">
+          <div class="console-header">
+            <span>Terminal Virtual — Inspección de Error</span>
+            <span id="intro-status">Listo</span>
+          </div>
+          <div id="intro-console-output" class="console-output">
+            <div class="console-line info">[Sistema] Consola virtual inicializada. Pulsa el botón para simular el error.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECCIÓN 2: LA CONSOLA DEL NAVEGADOR
+         ==================================================================== -->
+    <section id="tab-browser-console" class="section-content" role="tabpanel" aria-labelledby="btn-tab-browser-console">
+      <div class="section-header">
+        <span class="badge">Tema 6.6.2</span>
+        <h2 class="section-title">La Consola del Navegador</h2>
+        <p class="section-subtitle">
+          El panel DevTools es la herramienta de diagnóstico primordial incluida en todos los navegadores modernos.
+        </p>
+      </div>
+
+      <div class="card" style="margin-bottom: 2rem;">
+        <h3>⌨️ Atajos de Teclado para Abrir la Consola</h3>
+        <p>
+          Para acceder a las Herramientas de Desarrollador directamente en la pestaña <strong>Console</strong>, utiliza los siguientes atajos universales:
+        </p>
+
+        <div class="table-wrapper">
+          <table aria-label="Atajos de teclado para la consola">
+            <thead>
+              <tr>
+                <th>Navegador</th>
+                <th>Windows / Linux</th>
+                <th>macOS</th>
+                <th>Acceso por Menú</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Google Chrome</strong></td>
+                <td><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>J</kbd> o <kbd>F12</kbd></td>
+                <td><kbd>Cmd</kbd> + <kbd>Option</kbd> + <kbd>J</kbd></td>
+                <td>Menú ⋮ &gt; Más herramientas &gt; Herramientas del desarrollador</td>
+              </tr>
+              <tr>
+                <td><strong>Mozilla Firefox</strong></td>
+                <td><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>K</kbd> o <kbd>F12</kbd></td>
+                <td><kbd>Cmd</kbd> + <kbd>Option</kbd> + <kbd>K</kbd></td>
+                <td>Menú ☰ &gt; Más herramientas &gt; Herramientas para desarrolladores web</td>
+              </tr>
+              <tr>
+                <td><strong>Microsoft Edge</strong></td>
+                <td><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd> o <kbd>F12</kbd></td>
+                <td><kbd>Cmd</kbd> + <kbd>Option</kbd> + <kbd>I</kbd></td>
+                <td>Menú ⋯ &gt; Más herramientas &gt; Herramientas de desarrollo</td>
+              </tr>
+              <tr>
+                <td><strong>Apple Safari</strong></td>
+                <td>No disponible</td>
+                <td><kbd>Cmd</kbd> + <kbd>Option</kbd> + <kbd>C</kbd></td>
+                <td>Safari &gt; Ajustes &gt; Avanzado &gt; Marcar "Mostrar menú Desarrollo"</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Simulador de ReferenceError con funcionfalsa() -->
+      <div class="interactive-panel">
+        <div class="panel-title">
+          <span>🧪 Caso Práctico del Libro: Llamada a <code>funcionfalsa()</code></span>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
+          El manual ejemplifica la depuración ejecutando una función inexistente. Al pulsar el botón, el código invocará <code>funcionfalsa()</code>:
+        </p>
+
+        <div class="code-block">
+<span class="code-comment">// Código ejecutado al hacer clic:</span>
+<span class="code-keyword">function</span> <span class="code-fn">ejecutarPruebaInexistente</span>() {
+  <span class="code-fn">funcionfalsa</span>(); <span class="code-comment">// &lt;-- ¡Esta función no ha sido definida en ningún archivo!</span>
+}
+        </div>
+
+        <div class="btn-group">
+          <button id="btn-trigger-funcionfalsa" class="btn btn-danger">
+            💥 Ejecutar funcionfalsa()
+          </button>
+          <button id="btn-clear-browser-console" class="btn btn-secondary">
+            🧹 Limpiar Consola
+          </button>
+        </div>
+
+        <div class="console-box" aria-live="polite">
+          <div class="console-header">
+            <span>Consola del Navegador Simulada</span>
+            <span>Error Stack Inspector</span>
+          </div>
+          <div id="browser-console-output" class="console-output">
+            <div class="console-line info">[Consola lista] Abre las DevTools (F12) o pulsa el botón para ver la captura del error en pantalla.</div>
+          </div>
+        </div>
+
+        <div id="browser-explanation-box" class="card" style="margin-top: 1.5rem; border-left: 4px solid var(--danger); display: none;">
+          <h4 style="color: #f87171; margin-bottom: 0.5rem; font-size: 1.1rem;">Análisis Anatómico del Error:</h4>
+          <p style="color: #e2e8f0; font-family: var(--font-mono); font-size: 0.9rem; margin-bottom: 0.5rem;">
+            Uncaught ReferenceError: funcionfalsa is not defined at HTMLButtonElement.ejecutarPruebaInexistente
+          </p>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">
+            <strong>¿Qué significa?</strong> El motor JavaScript leyó el identificador <code>funcionfalsa</code> e intentó resolverlo buscando en el ámbito local y luego en el ámbito global (<code>window</code>). Al no encontrar ninguna variable o función registrada con ese nombre, aborta inmediatamente y lanza una excepción de tipo <code>ReferenceError</code>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECCIÓN 3: EL OBJETO CONSOLE
+         ==================================================================== -->
+    <section id="tab-console-object" class="section-content" role="tabpanel" aria-labelledby="btn-tab-console-object">
+      <div class="section-header">
+        <span class="badge">Tema 6.6.3</span>
+        <h2 class="section-title">El Objeto Console</h2>
+        <p class="section-subtitle">
+          Métodos fundamentales para monitorizar el estado interno de nuestras aplicaciones: <code>log()</code>, <code>assert()</code> y <code>clear()</code>.
+        </p>
+      </div>
+
+      <div class="card-grid">
+        <article class="card">
+          <h3>📜 <code>console.log()</code></h3>
+          <p>
+            Imprime cualquier valor primitivo o referencia a objetos en la consola estándar. Permite pasar múltiples argumentos separados por comas y utilizar cadenas con formato.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>🛡️ <code>console.assert(afirmación, mensaje)</code></h3>
+          <p>
+            Evalúa una expresión booleana. Si es <strong>falsa</strong>, escribe un mensaje de error en la consola. Si es verdadera, no produce ninguna salida, permitiendo pruebas de aserción no intrusivas.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>🧼 <code>console.clear()</code></h3>
+          <p>
+            Limpia completamente el búfer de salida de la consola activa, permitiendo empezar una nueva sesión de depuración con una vista limpia.
+          </p>
+        </article>
+      </div>
+
+      <!-- Demostración del bucle for del libro con f = 5 -->
+      <div class="interactive-panel">
+        <div class="panel-title">
+          <span>🔁 Demostración del Manual: Depurando el Bucle con Variable <code>f</code></span>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
+          Analiza el siguiente código clásico extraído del manual donde se itera una variable <code>f</code> de 0 a 4 y se inspecciona su valor tras salir del bucle:
+        </p>
+
+        <div class="code-block">
+<span class="code-keyword">for</span> (<span class="code-keyword">var</span> f = <span class="code-num">0</span>; f &lt; <span class="code-num">5</span>; f++) {
+  <span class="code-fn">console</span>.<span class="code-fn">log</span>(<span class="code-str">"Iteración f ="</span>, f);
+}
+<span class="code-fn">console</span>.<span class="code-fn">log</span>(<span class="code-str">"Valor final de f ="</span>, f); <span class="code-comment">// ¿Por qué f vale 5 aquí?</span>
+<span class="code-fn">console</span>.<span class="code-fn">assert</span>(f === <span class="code-num">4</span>, <span class="code-str">"¡Fallo de aserción! f no es 4, vale:"</span>, f);
+        </div>
+
+        <div class="btn-group">
+          <button id="btn-run-loop-demo" class="btn btn-success">
+            ▶️ Ejecutar Bucle Completo
+          </button>
+          <button id="btn-run-assert-demo" class="btn btn-warning">
+            🛡️ Ejecutar console.assert(f === 4)
+          </button>
+          <button id="btn-inspect-object-demo" class="btn">
+            📦 Inspeccionar Objeto Completo
+          </button>
+          <button id="btn-clear-obj-console" class="btn btn-secondary">
+            🧹 console.clear()
+          </button>
+        </div>
+
+        <div class="console-box" aria-live="polite">
+          <div class="console-header">
+            <span>Terminal Virtual — Objeto Console</span>
+            <span id="obj-console-status">Búfer listo</span>
+          </div>
+          <div id="obj-console-output" class="console-output">
+            <div class="console-line info">[Consola lista] Haz clic en un botón superior para emitir registros.</div>
+          </div>
+        </div>
+
+        <!-- Explicación pedagógica de por qué f = 5 -->
+        <article class="card" style="margin-top: 1.5rem; background: var(--surface-alt);">
+          <h4 style="color: #60a5fa; margin-bottom: 0.5rem; font-size: 1.05rem;">
+            💡 Explicación Didáctica: ¿Por qué <code>f</code> vale 5 al terminar el bucle?
+          </h4>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">
+            El bucle tiene la condición de permanencia <code>f &lt; 5</code> y la expresión de paso <code>f++</code>.
+          </p>
+          <ol style="margin-left: 1.2rem; color: var(--text-muted); font-size: 0.9rem;">
+            <li>En la 4ª vuelta, <code>f</code> tiene el valor <code>4</code>. Como <code>4 &lt; 5</code> es verdadero, el cuerpo se ejecuta.</li>
+            <li>Al finalizar la iteración, se ejecuta <code>f++</code>, elevando el valor de <code>f</code> a <code>5</code>.</li>
+            <li>A continuación, el intérprete evalúa de nuevo la condición: <code>5 &lt; 5</code> resulta <strong>falso</strong>.</li>
+            <li>El bucle se interrumpe, pero la variable <code>f</code> declarada con <code>var</code> conserva su último valor asignado en el ámbito de la función: <strong>5</strong>.</li>
+          </ol>
+        </article>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECCIÓN 4: EL EVENTO ERROR
+         ==================================================================== -->
+    <section id="tab-error-event" class="section-content" role="tabpanel" aria-labelledby="btn-tab-error-event">
+      <div class="section-header">
+        <span class="badge">Tema 6.6.4</span>
+        <h2 class="section-title">El Evento Global Error</h2>
+        <p class="section-subtitle">
+          Interceptación centralizada de errores no controlados a través del objeto <code>window</code>.
+        </p>
+      </div>
+
+      <div class="card" style="margin-bottom: 2rem;">
+        <h3>🌐 ¿Cómo funciona <code>window.addEventListener('error', ...)</code>?</h3>
+        <p>
+          Cuando ocurre una excepción en tiempo de ejecución que no es atrapada por un bloque <code>try...catch</code>, el navegador dispara el evento global <code>error</code> sobre el objeto <code>window</code>.
+        </p>
+        <p>
+          El objeto <code>ErrorEvent</code> recibido contiene información forense exhaustiva para diagnosticar o reportar la anomalía a un servidor de telemetría:
+        </p>
+
+        <div class="table-wrapper">
+          <table aria-label="Propiedades del objeto ErrorEvent">
+            <thead>
+              <tr>
+                <th>Propiedad</th>
+                <th>Tipo</th>
+                <th>Descripción Didáctica</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>message</code></td>
+                <td><code>String</code></td>
+                <td>Descripción textual legible del error (ej. <em>"VariableNoExiste is not defined"</em>).</td>
+              </tr>
+              <tr>
+                <td><code>filename</code></td>
+                <td><code>String</code></td>
+                <td>Ruta absoluta o relativa del archivo JavaScript donde se originó el fallo.</td>
+              </tr>
+              <tr>
+                <td><code>lineno</code></td>
+                <td><code>Number</code></td>
+                <td>Número exacto de la línea del archivo donde la ejecución se quebró.</td>
+              </tr>
+              <tr>
+                <td><code>colno</code></td>
+                <td><code>Number</code></td>
+                <td>Número de la columna exacta dentro de la línea donde falló el analizador.</td>
+              </tr>
+              <tr>
+                <td><code>error</code></td>
+                <td><code>Object</code></td>
+                <td>Instancia nativa de <code>Error</code> (contiene el <em>stack trace</em> y constructor específico).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Simulador de captura del evento global -->
+      <div class="interactive-panel">
+        <div class="panel-title">
+          <span>⚡ Banco de Pruebas: Provocar y Capturar Error Global</span>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
+          Al presionar el botón se ejecutará una instrucción no controlada (acceder a una propiedad profunda de un objeto <code>undefined</code>). El manejador global escuchará el evento, prevendrá la interrupción silenciosa y extraerá todas sus propiedades en vivo:
+        </p>
+
+        <div class="btn-group">
+          <button id="btn-trigger-global-error" class="btn btn-danger">
+            💥 Provocar Error Global no Controlado
+          </button>
+          <button id="btn-clear-error-event" class="btn btn-secondary">
+            🧹 Limpiar Registros
+          </button>
+        </div>
+
+        <div class="card-grid" style="margin-top: 1.25rem;">
+          <div class="card" style="background: #090d16; border-color: var(--surface-alt);">
+            <h4 style="color: #38bdf8; font-size: 0.95rem; margin-bottom: 0.75rem;">Metadatos Extraídos del ErrorEvent:</h4>
+            <div id="error-event-details" style="font-family: var(--font-mono); font-size: 0.85rem; color: #cbd5e1; display: flex; flex-direction: column; gap: 0.35rem;">
+              <div><strong>message:</strong> <span id="ev-prop-msg" style="color: #f87171;">(ningún error capturado)</span></div>
+              <div><strong>filename:</strong> <span id="ev-prop-file">-</span></div>
+              <div><strong>lineno:</strong> <span id="ev-prop-line">-</span></div>
+              <div><strong>colno:</strong> <span id="ev-prop-col">-</span></div>
+              <div><strong>error.name:</strong> <span id="ev-prop-name">-</span></div>
+            </div>
+          </div>
+
+          <div class="console-box" aria-live="polite">
+            <div class="console-header">
+              <span>Bitácora de Escucha Global (window.onerror)</span>
+            </div>
+            <div id="error-event-console-output" class="console-output">
+              <div class="console-line info">[Monitor activo] Esperando disparador de evento error...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECCIÓN 5: EXCEPCIONES (TRY / CATCH / THROW)
+         ==================================================================== -->
+    <section id="tab-exceptions" class="section-content" role="tabpanel" aria-labelledby="btn-tab-exceptions">
+      <div class="section-header">
+        <span class="badge">Tema 6.6.5</span>
+        <h2 class="section-title">Control de Excepciones: try, catch y throw</h2>
+        <p class="section-subtitle">
+          Manejo defensivo de errores y lanzamiento de excepciones de negocio controladas.
+        </p>
+      </div>
+
+      <div class="card-grid">
+        <article class="card">
+          <h3>🚀 La Sentencia <code>throw</code></h3>
+          <p>
+            Permite interrumpir intencionalmente el flujo normal del programa y lanzar una excepción cuando una condición obligatoria no se satisface.
+          </p>
+          <div class="code-block" style="margin-top: 0.5rem; margin-bottom: 0;">
+<span class="code-keyword">throw</span> <span class="code-keyword">new</span> <span class="code-fn">Error</span>(<span class="code-str">"Mensaje descriptivo"</span>);
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>🛡️ Los Bloques <code>try ... catch</code></h3>
+          <p>
+            <code>try</code> envuelve el bloque de código susceptible de fallar. Si se produce un error (o un <code>throw</code>), el control salta inmediatamente al bloque <code>catch(error)</code> sin que la aplicación se congele.
+          </p>
+        </article>
+      </div>
+
+      <!-- Caso interactivo del libro: función vendido() con stock = 5 -->
+      <div class="interactive-panel">
+        <div class="panel-title">
+          <span>📦 Simulación del Libro: Gestión de Inventario con <code>vendido()</code></span>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
+          En el manual se implementa una función de venta de artículos con un stock inicial de 5 unidades. Si la cantidad solicitada supera las existencias, se lanza una excepción con el texto exacto <code>"Sin Existencia"</code>, la cual debe ser atrapada por <code>try...catch</code>.
+        </p>
+
+        <div class="code-block">
+<span class="code-keyword">var</span> stockActual = <span class="code-num">5</span>;
+
+<span class="code-keyword">function</span> <span class="code-fn">vendido</span>(unidades) {
+  <span class="code-keyword">if</span> (unidades &gt; stockActual) {
+    <span class="code-keyword">throw</span> <span class="code-keyword">new</span> <span class="code-fn">Error</span>(<span class="code-str">"Sin Existencia"</span>);
+  }
+  stockActual -= unidades;
+  <span class="code-keyword">return</span> stockActual;
+}
+
+<span class="code-comment">// Invocación controlada:</span>
+<span class="code-keyword">try</span> {
+  <span class="code-fn">vendido</span>(solicitud);
+} <span class="code-keyword">catch</span> (err) {
+  <span class="code-fn">console</span>.<span class="code-fn">error</span>(<span class="code-str">"Captura:"</span>, err.message);
+}
+        </div>
+
+        <!-- Dashboard de stock interactivo -->
+        <div class="stock-dashboard">
+          <div>
+            <span style="font-size: 0.9rem; color: var(--text-muted); display: block;">Unidades Disponibles en Almacén:</span>
+            <strong id="stock-display" class="stock-indicator">5</strong>
+          </div>
+          <button id="btn-reset-stock" class="btn btn-secondary">
+            🔄 Restablecer a 5 Unidades
+          </button>
+        </div>
+
+        <form id="sales-form" class="sales-form" onsubmit="return false;">
+          <label for="input-units-to-buy" style="font-weight: 600; font-size: 0.95rem;">
+            Cantidad a Comprar:
+          </label>
+          <input type="number" id="input-units-to-buy" class="input-number" min="1" max="20" value="2" required>
+          <button type="button" id="btn-execute-sale" class="btn btn-success">
+            🛒 Procesar Venta con vendido()
+          </button>
+        </form>
+
+        <!-- Mensajes de alerta en el DOM -->
+        <div id="sale-alert" class="alert-message" role="alert"></div>
+
+        <div class="console-box" style="margin-top: 1.25rem;" aria-live="polite">
+          <div class="console-header">
+            <span>Terminal Virtual — Registro de Excepciones</span>
+            <span id="stock-console-status">Almacén Activo</span>
+          </div>
+          <div id="stock-console-output" class="console-output">
+            <div class="console-line info">[Almacén] Stock inicial de 5 unidades cargado exitosamente.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECCIÓN 6: EJERCICIOS PRÁCTICOS INTERACTIVOS
+         ==================================================================== -->
+    <section id="tab-exercises" class="section-content" role="tabpanel" aria-labelledby="btn-tab-exercises">
+      <div class="section-header">
+        <span class="badge">Tema 6.6.6</span>
+        <h2 class="section-title">Laboratorio de Ejercicios Prácticos</h2>
+        <p class="section-subtitle">
+          Pon a prueba tus conocimientos corrigiendo, depurando y protegiendo código en un entorno interactivo con validación inmediata.
+        </p>
+      </div>
+
+      <!-- EJERCICIO 1 -->
+      <article class="exercise-container" id="exercise-1-box">
+        <div class="exercise-header">
+          <span class="exercise-number">Ejercicio 1: Corregir Función Mal Escrita</span>
+          <span class="exercise-status" id="ex1-status">Pendiente</span>
+        </div>
+        <p class="exercise-desc">
+          <strong>Enunciado:</strong> La función <code>calcularTotal</code> contiene errores tipográficos sintácticos y de referencia (<code>retun</code> y <code>cantdad</code>). Corrígelos para que al invocarla con precio <code>10</code> y cantidad <code>3</code> retorne exactamente <code>30</code> sin arrojar excepciones.
+        </p>
+
+        <label for="ex1-code" style="display: none;">Editor Ejercicio 1</label>
+        <textarea id="ex1-code" class="code-editor" spellcheck="false">function calcularTotal(precio, cantidad) {
+  // Corrige los errores en esta línea:
+  retun precio * cantdad;
+}
+
+// Invocación de prueba:
+console.log("Total calculado:", calcularTotal(10, 3));</textarea>
+
+        <div class="btn-group">
+          <button id="btn-ex1-run" class="btn btn-primary">
+            ▶️ Ejecutar y Validar
+          </button>
+          <button id="btn-ex1-reset" class="btn btn-secondary">
+            🔄 Restablecer Código
+          </button>
+        </div>
+
+        <div class="console-box">
+          <div class="console-header"><span>Salida Ejercicio 1</span></div>
+          <div id="ex1-console" class="console-output">
+            <div class="console-line info">Presiona 'Ejecutar y Validar' para probar tu solución.</div>
+          </div>
+        </div>
+        <div id="ex1-feedback" class="exercise-feedback"></div>
+      </article>
+
+      <!-- EJERCICIO 2 -->
+      <article class="exercise-container" id="exercise-2-box">
+        <div class="exercise-header">
+          <span class="exercise-number">Ejercicio 2: Depurar Bucle con console.log</span>
+          <span class="exercise-status" id="ex2-status">Pendiente</span>
+        </div>
+        <p class="exercise-desc">
+          <strong>Enunciado:</strong> El siguiente algoritmo pretende sumar los números enteros del 1 al 5 (resultado esperado: <code>15</code>), pero debido a un error lógico en la condición o acumulador produce un resultado erróneo. Inserta llamadas a <code>console.log()</code> para inspeccionar cada paso y ajusta el bucle para que el acumulador total final sea <code>15</code>.
+        </p>
+
+        <label for="ex2-code" style="display: none;">Editor Ejercicio 2</label>
+        <textarea id="ex2-code" class="code-editor" spellcheck="false">var suma = 0;
+
+// Corrige el límite o condición para sumar del 1 al 5:
+for (var i = 1; i < 5; i++) {
+  suma += i;
+  console.log("Paso i =", i, "| Suma parcial =", suma);
+}
+
+console.log("Suma total final =", suma);</textarea>
+
+        <div class="btn-group">
+          <button id="btn-ex2-run" class="btn btn-primary">
+            ▶️ Ejecutar y Validar
+          </button>
+          <button id="btn-ex2-reset" class="btn btn-secondary">
+            🔄 Restablecer Código
+          </button>
+        </div>
+
+        <div class="console-box">
+          <div class="console-header"><span>Salida Ejercicio 2</span></div>
+          <div id="ex2-console" class="console-output">
+            <div class="console-line info">Presiona 'Ejecutar y Validar' para probar tu solución.</div>
+          </div>
+        </div>
+        <div id="ex2-feedback" class="exercise-feedback"></div>
+      </article>
+
+      <!-- EJERCICIO 3 -->
+      <article class="exercise-container" id="exercise-3-box">
+        <div class="exercise-header">
+          <span class="exercise-number">Ejercicio 3: Validar Rango de Edad con try / catch</span>
+          <span class="exercise-status" id="ex3-status">Pendiente</span>
+        </div>
+        <p class="exercise-desc">
+          <strong>Enunciado:</strong> Implementa una función <code>validarEdad(edad)</code> que acepte edades válidas estrictamente mayores a 0 y menores a 120 (<code>edad &gt; 0 &amp;&amp; edad &lt; 120</code>). Si la edad está fuera de rango o no es numérica, debe lanzar (<code>throw</code>) un <code>Error</code> con el mensaje exacto <code>"Edad inválida"</code>. Luego, envuelve las llamadas dentro de un bloque <code>try ... catch</code> y reporta el mensaje capturado.
+        </p>
+
+        <label for="ex3-code" style="display: none;">Editor Ejercicio 3</label>
+        <textarea id="ex3-code" class="code-editor" spellcheck="false">function validarEdad(edad) {
+  if (typeof edad !== "number" || edad <= 0 || edad >= 120) {
+    throw new Error("Edad inválida");
+  }
+  return "Edad permitida: " + edad;
+}
+
+try {
+  console.log(validarEdad(25));   // Caso válido
+  console.log(validarEdad(-5));   // Debe lanzar excepción
+} catch (error) {
+  console.log("Excepción capturada:", error.message);
+}</textarea>
+
+        <div class="btn-group">
+          <button id="btn-ex3-run" class="btn btn-primary">
+            ▶️ Ejecutar y Validar
+          </button>
+          <button id="btn-ex3-reset" class="btn btn-secondary">
+            🔄 Restablecer Código
+          </button>
+        </div>
+
+        <div class="console-box">
+          <div class="console-header"><span>Salida Ejercicio 3</span></div>
+          <div id="ex3-console" class="console-output">
+            <div class="console-line info">Presiona 'Ejecutar y Validar' para probar tu solución.</div>
+          </div>
+        </div>
+        <div id="ex3-feedback" class="exercise-feedback"></div>
+      </article>
+
+      <!-- EJERCICIO 4 -->
+      <article class="exercise-container" id="exercise-4-box">
+        <div class="exercise-header">
+          <span class="exercise-number">Ejercicio 4: Capturar Evento Global de Error</span>
+          <span class="exercise-status" id="ex4-status">Pendiente</span>
+        </div>
+        <p class="exercise-desc">
+          <strong>Enunciado:</strong> Registra un escucha para el evento global <code>error</code> en <code>window</code> (usando <code>window.addEventListener("error", ...)</code>). El manejador debe recibir el evento e imprimir por consola su propiedad <code>event.message</code>.
+        </p>
+
+        <label for="ex4-code" style="display: none;">Editor Ejercicio 4</label>
+        <textarea id="ex4-code" class="code-editor" spellcheck="false">// Registra el listener global para capturar errores:
+window.addEventListener("error", function(event) {
+  console.log("Error global interceptado:", event.message);
+});
+
+// Prueba provocando un fallo no controlado:
+setTimeout(function() {
+  variableInexistenteDePrueba.activar();
+}, 50);</textarea>
+
+        <div class="btn-group">
+          <button id="btn-ex4-run" class="btn btn-primary">
+            ▶️ Ejecutar y Validar
+          </button>
+          <button id="btn-ex4-reset" class="btn btn-secondary">
+            🔄 Restablecer Código
+          </button>
+        </div>
+
+        <div class="console-box">
+          <div class="console-header"><span>Salida Ejercicio 4</span></div>
+          <div id="ex4-console" class="console-output">
+            <div class="console-line info">Presiona 'Ejecutar y Validar' para probar tu solución.</div>
+          </div>
+        </div>
+        <div id="ex4-feedback" class="exercise-feedback"></div>
+      </article>
+    </section>
+
+  </main>
+
+  <!-- ======================================================================
+       PIE DE PÁGINA
+       ====================================================================== -->
+  <footer class="footer">
+    <p>
+      Proyecto Educativo: <strong>El Gran Libro de HTML5, CSS3 y JavaScript</strong> &mdash; Capítulo 6.6 Depuración.
+    </p>
+    <p style="margin-top: 0.25rem;">
+      Desarrollado con JavaScript Vanilla estándar (ES5/ES6) enfocado en didáctica de la programación web.
+    </p>
+  </footer>
+
+  <!-- Script principal del proyecto -->
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,15 +1,16 @@
-# Colección Didáctica de JavaScript: 21 Proyectos Educativos
+# Colección Didáctica de JavaScript: 21 Proyectos Educativos y Proyecto Interactivo de Depuración
 
-Bienvenido a la colección oficial de **21 proyectos educativos de JavaScript puro (Vanilla JS)**, diseñada con un enfoque pedagógico riguroso y progresivo, basado en el temario del manual *"El gran libro de HTML, CSS y JavaScript"*.
+Bienvenido a la colección oficial de proyectos educativos de **JavaScript puro (Vanilla JS)**, diseñada con un enfoque pedagógico riguroso y progresivo, basado en el temario del manual *"El gran libro de HTML, CSS y JavaScript"*.
 
-Esta serie de ejercicios está construida para llevar a los estudiantes desde los fundamentos sintácticos de las funciones hasta la manipulación dinámica del DOM, objetos estándar, asincronía, técnicas profesionales de **depuración (debugging)** y el desarrollo de proyectos integradores con persistencia en LocalStorage y manejo robusto de excepciones.
+Esta serie de ejercicios está construida para llevar a los estudiantes desde los fundamentos sintácticos de las funciones hasta la manipulación dinámica del DOM, objetos estándar, asincronía, técnicas profesionales de **depuración (debugging)** y el desarrollo de proyectos integradores con persistencia en LocalStorage y manejo robusto de excepciones. Además, incluye la suite interactiva completa **`proyecto-depuracion/`** que unifica todas las lecciones del capítulo 6.6 con editores de código y consolas virtuales.
 
 ---
 
-## 📋 Tabla Resumen de Ejercicios
+## 📋 Tabla Resumen de Ejercicios y Proyectos
 
-| # | Ejercicio | Módulo del Manual | Dificultad | Conceptos Clave | Enlace |
+| # | Ejercicio / Proyecto | Módulo del Manual | Dificultad | Conceptos Clave | Enlace |
 |---|---|---|:---:|---|:---:|
+| 🌟 | **Proyecto Interactivo: Suite de Depuración** | 6.6 Depuración Completo | Intermedio / Avanzado | Pestañas, DevTools, `funcionfalsa()`, bucle `f=5`, `assert`, `ErrorEvent`, `vendido()`, 4 ejercicios interactivos con editor | [Abrir Proyecto](./proyecto-depuracion/) |
 | 01 | **Funciones Básicas** | 6.2 Funciones | Principiante | Declaración formal, parámetros, reutilización, DOM dinámico | [Ver Proyecto](./01-funciones-basicas/) |
 | 02 | **Funciones con Retorno** | 6.2 Funciones | Principiante | Sentencia `return`, cálculo de área, funciones puras, validación | [Ver Proyecto](./02-funciones-retorno/) |
 | 03 | **Ámbito de Variables** | 6.2 Funciones | Intermedio | Global vs. Local, Scope Chain, Shadowing, `ReferenceError` | [Ver Proyecto](./03-ambito-variables/) |
@@ -144,7 +145,13 @@ Esta serie de ejercicios está construida para llevar a los estudiantes desde lo
 │   ├── script.js
 │   └── README.md
 │
-└── 21-proyecto-integrador-depuracion/         # 6.6 Depuración (Proyecto Integrador)
+├── 21-proyecto-integrador-depuracion/         # 6.6 Depuración (Proyecto Integrador)
+│   ├── index.html
+│   ├── script.js
+│   ├── styles.css
+│   └── README.md
+│
+└── proyecto-depuracion/                       # 6.6 Suite Interactiva Integral
     ├── index.html
     ├── script.js
     ├── styles.css
@@ -156,6 +163,7 @@ Esta serie de ejercicios está construida para llevar a los estudiantes desde lo
 ## 🔍 Sección 6.6: Depuración (Debugging)
 
 La sección 6.6 dota a los estudiantes de herramientas críticas para la resolución de errores en desarrollo profesional:
+- **🌟 Suite Interactiva (`proyecto-depuracion/`):** Aplicación interactiva con navegación por pestañas fijas, demostraciones de consola con DevTools, análisis de `funcionfalsa()`, bucle con variable `f=5`, simulación de inventario `vendido()` con `throw new Error("Sin Existencia")`, monitoreo global con `window.addEventListener('error')` y laboratorio con 4 ejercicios prácticos editables y evaluados al instante en un sandbox seguro.
 - **17 · Consola del Navegador:** Comprensión de herramientas de desarrollo (DevTools), atajos de teclado para Chrome, Firefox, Edge y Safari, y diagnóstico de `ReferenceError` y `TypeError`.
 - **18 · Objeto Console:** Dominio de `console.log()` en bucles `for`, aserciones con `console.assert()`, limpieza con `console.clear()` y visualización no bloqueante frente a `alert()`.
 - **19 · Evento Global Error:** Monitoreo y telemetría de fallos en tiempo de ejecución interceptados en `window` con `ErrorEvent` (`message`, `lineno`, `colno`, `filename`).
