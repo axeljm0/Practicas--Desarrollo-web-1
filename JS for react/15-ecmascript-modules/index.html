@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>15 - ECMAScript Modules</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background-color: #0f172a;
+      color: #f8fafc;
+      padding: 2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #1e293b;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      border: 1px solid #334155;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      color: #61dafb;
+      text-decoration: none;
+    }
+    code {
+      background: #0f172a;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      color: #38bdf8;
+    }
+  </style>
+</head>
+<body>
+  <a class="back-link" href="../index.html">&larr; Volver al índice</a>
+  <h1>15 - ECMAScript Modules (ES Modules)</h1>
+  <p>Demostración de <code>import</code> y <code>export</code> nativos en el navegador.</p>
+
+  <div class="card">
+    <h3>Resultado de las funciones importadas:</h3>
+    <div id="module-output">Cargando módulo...</div>
+  </div>
+
+  <!-- Es indispensable especificar type="module" en el navegador -->
+  <script type="module" src="./index.js"></script>
+</body>
+</html>

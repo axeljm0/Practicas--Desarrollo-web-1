@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>07 - Manipulación del DOM (Vanilla JS)</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background-color: #0f172a;
+      color: #f8fafc;
+      padding: 2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #1e293b;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      border: 1px solid #334155;
+    }
+    button {
+      background-color: #61dafb;
+      color: #000;
+      border: none;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-right: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    button:hover {
+      background-color: #38bdf8;
+    }
+    #counter-display {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #38bdf8;
+      margin: 1rem 0;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      background: #334155;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      color: #61dafb;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <a class="back-link" href="../index.html">&larr; Volver al índice</a>
+  <h1>07 - Manipulación Imperativa del DOM</h1>
+  <p>En este ejercicio vemos cómo creamos, modificamos y escuchamos eventos en el DOM con Vanilla JS.</p>
+
+  <div class="card" id="app">
+    <h3>Contador Vanilla JS</h3>
+    <div id="counter-display">0</div>
+    <div id="button-container"></div>
+  </div>
+
+  <div class="card">
+    <h3>Creación Dinámica de Elementos</h3>
+    <div id="list-container"></div>
+  </div>
+
+  <script src="./index.js"></script>
+</body>
+</html>
